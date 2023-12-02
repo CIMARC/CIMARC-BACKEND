@@ -13,11 +13,7 @@ const BlogsController=require('../Controllers/BlogsController.js')
 =======
 >>>>>>> Stashed changes
 module.exports = function () {
-<<<<<<< Updated upstream
-=======
 
-
->>>>>>> Stashed changes
 
     /** PAGOS */
     //Agregar pagos
@@ -98,7 +94,7 @@ router.delete('/pagos/eliminar/:idPagos',
         CasosController.actualizarCaso
     )
     
-//<<<<<<< HEAD
+
 
 
 
@@ -109,27 +105,27 @@ router.delete('/pagos/eliminar/:idPagos',
     router.post('/subir-documentos', 
     DocClienteController.agregardoccliente
     );
-//=======
+
     // Eliminar Casos
     router.delete('/trabajador-casos/:idCasos',
     
         CasosController.eliminarCasos
     )
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 //>>>>>>> main
         
 <<<<<<< Updated upstream
-
 =======
 >>>>>>> Stashed changes
+
+        
+
 
     router.get('/',(req,res) =>{
         res.send('inicio');
     });
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 
      //Eventos//
 =======
