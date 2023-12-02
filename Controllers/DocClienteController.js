@@ -64,3 +64,8 @@ exports.agregardoccliente = async (req, res,next) => {
         next()
     }
 };
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes

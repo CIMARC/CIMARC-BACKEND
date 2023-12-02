@@ -3,6 +3,10 @@ const routes= require('./router');
 const flash = require('connect-flash');
 const session = require('express-session');
 //<<<<<<< HEAD
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 
 // Conexion a la base de datos
 const db = require('./config/db.js');
@@ -11,6 +15,11 @@ const db = require('./config/db.js');
 // crear el servidor
 const app = express();
 
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
 app.use(flash());
 
 app.use(session({
@@ -28,7 +37,10 @@ saveUninitialized: true
 // habilitar bodyparser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));      
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 // Rutas de la app
 app.use('/', routes());
 

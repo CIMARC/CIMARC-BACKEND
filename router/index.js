@@ -10,6 +10,11 @@ const EventosController=require('../Controllers/EventosController.js')
 const BlogsController=require('../Controllers/BlogsController.js')
 
 module.exports = function () {
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
 
     /** PAGOS */
     //Agregar pagos
@@ -109,11 +114,18 @@ router.delete('/pagos/eliminar/:idPagos',
     )
 //>>>>>>> main
         
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 
     router.get('/',(req,res) =>{
         res.send('inicio');
     });
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 
      //Eventos//
 
