@@ -44,5 +44,38 @@ app.use(bodyParser.urlencoded({extended: true}));
 // Rutas de la app
 app.use('/', routes());
 
+<<<<<<< Updated upstream
 //Puerto
 app.listen(5000);
+=======
+
+// Puerto
+const puerto = 3000;
+app.listen(puerto, () => {
+  console.log(`Servidor escuchando en el puerto ${puerto}`);
+});
+
+
+
+
+
+
+
+
+
+
+//  OTRA OPCION 
+// // Definir una función asincrónica para la conexión a la base de datos
+// const conectarBD = async () => {
+//   try {
+//     await db.authenticate();
+//     db.sync()
+//     console.log('Conexión Correcta a la BD');
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
+// // Llamar a la función asincrónica para conectar a la base de datos
+// conectarBD();
+>>>>>>> Stashed changes

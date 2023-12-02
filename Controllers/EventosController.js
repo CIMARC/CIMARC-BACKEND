@@ -338,6 +338,7 @@ exports.obtenerEventos = async (req, res) => {
         }    } catch (error) {
         res.status(500).send('Hubo un error');
     }
+<<<<<<< Updated upstream
 };
 
 
@@ -361,3 +362,6 @@ exports.obtenerEventos = async (req, res) => {
 
 
 
+=======
+};
+>>>>>>> Stashed changes

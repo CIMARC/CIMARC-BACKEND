@@ -33,7 +33,11 @@ const configuracionMulter = {
 const upload = multer(configuracionMulter).single('documentos');  // Cambiado a 'documentos' en lugar de 'imagen'
 
 // sube archivo en el servidor
+<<<<<<< Updated upstream
 exports.subirArchivoEvento = (req, res, next) => {
+=======
+exports.subirArchivoBlog = (req, res, next) => {
+>>>>>>> Stashed changes
     upload(req, res, function (error) {
         if (error) {
             if (error instanceof multer.MulterError) {
@@ -324,6 +328,7 @@ exports.eliminarBlog = async (req, res, next) => {
     }
 };
 
+<<<<<<< Updated upstream
 
 
 
@@ -346,6 +351,8 @@ exports.eliminarBlog = async (req, res, next) => {
 
 
 
+=======
+>>>>>>> Stashed changes
 exports.crearBlogs = async (req, res, next) => {
     const blogs = new Blogs(req.body);
     try {
