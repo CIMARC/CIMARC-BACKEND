@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
-<<<<<<< Updated upstream
 
-=======
 const CasosController = require('../Controllers/CasosController.js');
 const DocClienteController = require('../Controllers/DocClienteController.js');
 const PagosController = require('../Controllers/PagosController.js');
@@ -10,11 +8,8 @@ const UsuarioController = require('../Controllers/UsuarioController.js');
 const NoticiasController = require('../Controllers/NoticiasController.js');
 const EventosController=require('../Controllers/EventosController.js')
 const BlogsController=require('../Controllers/BlogsController.js')
->>>>>>> Stashed changes
+
 module.exports = function () {
-<<<<<<< Updated upstream
-=======
-const NoticiasController = require('../Controllers/NoticiasController.js');
 
     /** PAGOS */
     //Agregar pagos
@@ -114,14 +109,11 @@ router.delete('/pagos/eliminar/:idPagos',
     )
 //>>>>>>> main
         
-<<<<<<< Updated upstream
-    
->>>>>>> Stashed changes
+
 
     router.get('/',(req,res) =>{
         res.send('inicio');
     });
-=======
 
      //Eventos//
 
@@ -182,19 +174,6 @@ router.delete('/pagos/eliminar/:idPagos',
     )
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     // Eliminar Eventos
     router.delete('/eventos/eliminar/:idEventos',
     EventosController.eliminarEventos
@@ -231,7 +210,7 @@ router.delete('/pagos/eliminar/:idPagos',
     BlogsController.eliminarBlogs
     );
 
->>>>>>> Stashed changes
+
 
     return router;
 }
