@@ -33,11 +33,8 @@ const configuracionMulter = {
 const upload = multer(configuracionMulter).single('documentos');  // Cambiado a 'documentos' en lugar de 'imagen'
 
 // sube archivo en el servidor
-<<<<<<< Updated upstream
-exports.subirArchivoEvento = (req, res, next) => {
-=======
 exports.subirArchivoBlog = (req, res, next) => {
->>>>>>> Stashed changes
+
     upload(req, res, function (error) {
         if (error) {
             if (error instanceof multer.MulterError) {
@@ -324,132 +321,6 @@ exports.eliminarBlog = async (req, res, next) => {
         res.json({ mensaje: 'blog eliminado exitosamente' });
     } catch (error) {
         console.log(error);
-        next(error);
-    }
-};
-
-<<<<<<< Updated upstream
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-=======
->>>>>>> Stashed changes
-exports.crearBlogs = async (req, res, next) => {
-    const blogs = new Blogs(req.body);
-    try {
-        //almacenar un registro
-        await blogs.save();
-        res.json({mensaje: 'Se agrego un nuevo Evento'});
-    } catch (error) {
-        //si hay un error
-        res.send(error);
-        next();
-    }
-};
-
-exports.obtenerBlogs = async (req, res) => {
-    try {
-        const blogs = await Blogs.findAll();
-        if (blogs.length === 0) {
-            res.status(404).send('No hay  eventos disponibles');
-        } else {
-            res.send(blogs);
-        }    } catch (error) {
-        res.status(500).send('Hubo un error');
-    }
-};
-
-// Mostrar Blogs
-exports.mostrarBlogs = async(req,res,next) =>{
-    
-    try {
-        // obtener todos los casos
-        const blog = await Blogs.findAll({});
-        res.json(blog);
-    } catch (error) {
-        console.log(error);
-        next();
-    }
-
-}
-
-
- // Actualizar un blog via id 
-exports.actualizarBlogs = async (req, res) => {
-    try {
-        console.log('Entrando en la función actualizarBlogs');
-
-        let blogs = await Blogs.findByPk(req.params.idBlogs);
-        if (!blogs) {
-            res.status(404).send('Blog no encontrado');
-            return;
-        }
-
-        console.log('Blog encontrado:', blogs);
-
-        let blogActualizado = await Blogs.update(req.body, {
-            where: { id: req.params.idBlogs }
-        });
-
-        console.log('Resultado de la actualización:', blogActualizado);
-
-        blogActualizado = await Blogs.findByPk(req.params.id);
-        res.send(blogActualizado);
-    } catch (error) {
-        console.error('Error en actualizarBlog:', error);
-        res.status(500).send(`Hubo un error: ${error.message}`);
-    }
-};
-exports.eliminarBlogs = async (req, res, next) => {
-    try {
-        const blogAEliminar = await Blogs.findByPk(req.params.idBlogs);
-
-        if (!blogAEliminar) {
-            return res.status(404).json({ mensaje: 'Blog no encontrado' });
-        }
-
-        // Eliminar el pago de la base de datos
-        await blogAEliminar.destroy();
-        res.json({ mensaje: 'Blog eliminado exitosamente' });
-    } catch (error) {
-        console.error(error);
-        next(error);
-    }
-};
-
-// Mostrar Blog por ID
-exports.mostrarBlogsID = async (req, res, next) => {
-    try {
-        const blogs = await Blogs.findByPk(req.params.idBlogs);
-
-        if (!blogs) {
-            res.json({ mensaje: 'El Blog no existe' });
-            return next();
-        }
-
-        // Mostrar el Evento
-        res.json(blogs);
-    } catch (error) {
-        console.error(error);
         next(error);
     }
 };
