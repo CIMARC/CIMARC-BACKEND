@@ -36,10 +36,10 @@ app.use(bodyParser.urlencoded({extended: true}));
 // Rutas de la app
 app.use('/', routes());
 
-<<<<<<< Updated upstream
+//<<<<<<< Updated upstream
 //Puerto
 app.listen(5000);
-=======
+//=======
 
 // Puerto
 const puerto = 3000;
@@ -70,4 +70,4 @@ app.listen(puerto, () => {
 
 // // Llamar a la función asincrónica para conectar a la base de datos
 // conectarBD();
->>>>>>> Stashed changes
+//>>>>>>> Stashed changes

@@ -33,8 +33,7 @@ const configuracionMulter = {
 const upload = multer(configuracionMulter).single('documentos');  // Cambiado a 'documentos' en lugar de 'imagen'
 
 // sube archivo en el servidor
-exports.subirArchivoBlog = (req, res, next) => {
-
+exports.subirImagenes = (req, res, next) => {
     upload(req, res, function (error) {
         if (error) {
             if (error instanceof multer.MulterError) {
@@ -55,24 +54,26 @@ exports.subirArchivoBlog = (req, res, next) => {
     });
 };
 // Agregar Blogs
-exports.nuevoBlog = async(req,res,next) =>{
-    const blog = new Blogs(req.body);
-
-    try{
-         // Verificar si se ha subido un documento
+exports.crearBlog = async (req, res, next) => {
+    const blogs = new Blogs(req.body);
+    try {
+        // Verificar si se ha subido un documento
         if( req.file && req.file.filename){
+//<<<<<<< Updated upstream
             blog.documentos = req.file.filename;
+//=======
+            blogs.imagen = req.file.filename;
+//>>>>>>> Stashed changes
         }
         //almacenar un registro
-        await blog.save();
-        res.json({mensaje: 'Se agrego un nuevo Blog'});
-    }catch(error){
+        await blogs.save();
+        res.json({mensaje: 'Se agrego un nuevo Blogs'});
+    } catch (error) {
         //si hay un error
         res.send(error);
         next();
     }
-
-}
+};
 // Mostrar Eventos
 exports.mostrarBlog = async(req,res,next) =>{
     

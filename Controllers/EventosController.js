@@ -56,24 +56,23 @@ exports.subirArchivoEvento = (req, res, next) => {
 
 
 // Agregar Casos
-exports.nuevoEvento = async(req,res,next) =>{
+exports.nuevoEvento = async (req, res, next) => {
     const evento = new Eventos(req.body);
 
-    try{
-         // Verificar si se ha subido un documento
-        if( req.file && req.file.filename){
+    try {
+        // Verificar si se ha subido un documento
+        if (req.file && req.file.filename) {
             evento.documentos = req.file.filename;
         }
-        //almacenar un registro
+        // almacenar un registro
         await evento.save();
-        res.json({mensaje: 'Se agrego un nuevo evento'});
-    }catch(error){
-        //si hay un error
-        res.send(error);
-        next();
+        res.status(201).json({ mensaje: 'Se agregó un nuevo evento', evento });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ mensaje: 'Error al agregar el evento' });
     }
+};
 
-}
 // Mostrar Eventos
 exports.mostrarEventos = async(req,res,next) =>{
     
@@ -226,7 +225,7 @@ exports.actualizarEventoIdByUser = async (req, res, next) => {
         let eventoAnterior = await Eventos.findByPk(req.params.idEventos);
         if (eventoAnterior.documentos) {
             // Construir la ruta completa al archivo antiguo
-            const rutaArchivoAntiguo = path.join(__dirname, `../uploads/casos/${eventoAnterior.documentos}`);
+            const rutaArchivoAntiguo = path.join(__dirname, `../uploads/eventos/${eventoAnterior.documentos}`);
 
             // Borrar el archivo antiguo
             await fs.unlink(rutaArchivoAntiguo);
