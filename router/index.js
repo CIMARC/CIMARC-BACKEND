@@ -8,7 +8,7 @@ const NoticiasController = require('../Controllers/NoticiasController.js');
 const EventosController=require('../Controllers/EventoController.js')
 const BlogsController=require('../Controllers/BlogsController.js');
 
-
+//hola mundo
 
 module.exports = function () {
 
