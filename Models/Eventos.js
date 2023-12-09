@@ -8,7 +8,7 @@ const Eventos =  db.define('Eventos',{
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         allowNull: false,
-        primaryKey: true 
+        primaryKey: true
     },
     titulo:{
         type: DataTypes.STRING(100),
@@ -27,32 +27,27 @@ const Eventos =  db.define('Eventos',{
         type: DataTypes.TEXT,
         allowNull: false
     },
-    fecha: {
+    fecha:{
         type: DataTypes.DATEONLY,
-        allowNull: false,
+        allowNull : false,
         validate: {
-            notEmpty: {
-                msg: 'Agrega una fecha para el evento'
-            },
+            notEmpty :{
+                msg: 'Agrega una fecha para el evento '
+            }
         }
     },
     categoria:{
         type: DataTypes.TEXT,
         allowNull : false,
     },
-    documentos: {
-        type: DataTypes.STRING,  // Almacena el contenido del archivo PDF como un Binary Large Object
-        allowNull: false  // Puedes cambiar a false si quieres requerir un archivo PDF en cada pago
+    documentos:{
+        type: DataTypes.STRING,
+        allowNull : true,
     },
     ubicacion:{
         type: DataTypes.TEXT,
         allowNull : false,
     },
-    userid: {
-        type: DataTypes.UUID,
-        allowNull: false,
-    },
-
 });
 
 // // Definir la relación entre Usuario y Eventos

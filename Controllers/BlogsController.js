@@ -10,7 +10,7 @@ const configuracionMulter = {
     limits: { fileSize: 100000 },  // límite de tamaño en bytes
     storage: multer.diskStorage({
         destination: (req, file, next) => {
-            next(null, __dirname + '../../uploads/eventos');
+            next(null, __dirname + '../../uploads/blogs'); // Change the destination folder to 'uploads/noticias'
         },
         filename: (req, file, next) => {
             const extension = file.originalname.split('.').pop();  // obtener la extensión del archivo original
@@ -18,27 +18,28 @@ const configuracionMulter = {
         }
     }),
     fileFilter: (req, file, next) => {
-        const allowedFileTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+        const allowedImageTypes = ['image/jpeg', 'image/png']; // Update the allowed image MIME types
 
-        if (allowedFileTypes.includes(file.mimetype)) {
+        if (allowedImageTypes.includes(file.mimetype)) {
             // el formato es válido
             next(null, true);
         } else {
             // el formato no es válido
-            next(new Error('Formato no válido'), false);
+            next(new Error('Formato de imagen no válido'), false);
         }
     }
 };
 
-const upload = multer(configuracionMulter).single('documentos');  // Cambiado a 'documentos' en lugar de 'imagen'
+const upload = multer(configuracionMulter).single('imagen');  // Cambiado a 'documentos' en lugar de 'imagen'
 
 // sube archivo en el servidor
-exports.subirImagenes = (req, res, next) => {
+exports.subirArchivoBlog = (req, res, next) => {
+
     upload(req, res, function (error) {
         if (error) {
             if (error instanceof multer.MulterError) {
                 if (error.code === 'LIMIT_FILE_SIZE') {
-                    req.flash('error', 'El Archivo es muy grande');
+                    req.flash('error', 'La imagen es muy grande');
                 } else {
                     req.flash('error', error.message);
                 }
@@ -54,26 +55,24 @@ exports.subirImagenes = (req, res, next) => {
     });
 };
 // Agregar Blogs
-exports.crearBlog = async (req, res, next) => {
-    const blogs = new Blogs(req.body);
-    try {
-        // Verificar si se ha subido un documento
+exports.nuevoBlog = async(req,res,next) =>{
+    const blog = new Blogs(req.body);
+
+    try{
+         // Verificar si se ha subido un documento
         if( req.file && req.file.filename){
-//<<<<<<< Updated upstream
-            blog.documentos = req.file.filename;
-//=======
-            blogs.imagen = req.file.filename;
-//>>>>>>> Stashed changes
+            blog.imagen = req.file.filename;
         }
         //almacenar un registro
-        await blogs.save();
-        res.json({mensaje: 'Se agrego un nuevo Blogs'});
-    } catch (error) {
+        await blog.save();
+        res.json({mensaje: 'Se agrego un nuevo Blog'});
+    }catch(error){
         //si hay un error
         res.send(error);
         next();
     }
-};
+
+}
 // Mostrar Eventos
 exports.mostrarBlog = async(req,res,next) =>{
     
@@ -113,13 +112,13 @@ exports.actualizarBlog = async (req, res, next) => {
 
         // Verificar si hay un archivo nuevo
         if (req.file && req.file.filename) {
-            nuevoBlog.documentos = req.file.filename;
+            nuevoBlog.imagen = req.file.filename;
 
             // Obtener el caso anterior para borrar el archivo antiguo
-            let blognterior = await Eventos.findByPk(req.params.idBlogs);
-            if ( blognterior .documentos) {
+            let blognterior = await Blogs.findByPk(req.params.idBlogs);
+            if ( blognterior .imagen) {
                 // Construir la ruta completa al archivo antiguo
-                const rutaArchivoAntiguo = path.join(__dirname, `../uploads/blog/${blognterior.documentos}`);
+                const rutaArchivoAntiguo = path.join(__dirname, `../uploads/blogs/${blognterior.imagen}`);
 
                 // Borrar el archivo antiguo
                 await fs.unlink(rutaArchivoAntiguo);
@@ -127,7 +126,7 @@ exports.actualizarBlog = async (req, res, next) => {
         } else {
             // Obtener el caso anterior para mantener el nombre del documento
             let blognterior = await Blogs.findByPk(req.params.idBlogs);
-            nuevoBlog.documentos = blognterior.documentos;
+            nuevoBlog.imagen = blognterior.imagen;
         }
 
         // Actualizar el caso en la base de datos y obtener el número de filas afectadas
@@ -153,12 +152,37 @@ exports.actualizarBlog = async (req, res, next) => {
     }
 };
 
+exports.eliminarBlog = async (req, res, next) => {
+    try {
+        const blogAEliminar = await Blogs.findByPk(req.params.idBlogs);
+
+        if (!blogAEliminar) {
+            return res.status(404).json({ mensaje: 'Caso no encontrado' });
+        }
+
+        // Borrar el archivo asociado al caso si existe
+        if (blogAEliminar.imagen) {
+            const rutaArchivo = path.join(__dirname, `../uploads/blogs/${blogAEliminar.imagen}` );
+            await fs.unlink(rutaArchivo);
+        }
+
+         // Eliminar el caso de la base de datos
+        await blogAEliminar.destroy();
+
+        //console.log('Ruta del archivo a eliminar:', rutaArchivo); verificar la ruta
+        res.json({ mensaje: 'blog eliminado exitosamente' });
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
+};
+
 exports.encontrarBlogByUser = async (req, res, next) => {
     try {
         const Userid  = await Usuario.findByPk(req.params.userid);
         if (!Userid) {
-            return res.status(404).json({ mensaje: 'Usuario no encontrado' });
-            next();
+            res.status(404).json({ mensaje: 'Usuario no encontrado' });
+            return next();
         }
         const blog = await Blogs.findAll({
             where: { userid: req.params.userid },
@@ -218,13 +242,13 @@ exports.actualizarBlogIdByUser = async (req, res, next) => {
 
     // Verificar si hay un archivo nuevo
     if (req.file && req.file.filename) {
-        nuevoBlog.documentos = req.file.filename;
+        nuevoBlog.imagen = req.file.filename;
 
         // Obtener el caso anterior para borrar el archivo antiguo
-        let blogAnterior = await Blogs.findByPk(req.params.idEventos);
-        if (blogAnterior.documentos) {
+        let blogAnterior = await Blogs.findByPk(req.params.idBlogs);
+        if (blogAnterior.imagen) {
             // Construir la ruta completa al archivo antiguo
-            const rutaArchivoAntiguo = path.join(__dirname, `../uploads/blog/${blogAnterior.documentos}`);
+            const rutaArchivoAntiguo = path.join(__dirname, `../uploads/blogs/${blogAnterior.imagen}`);
 
             // Borrar el archivo antiguo
             await fs.unlink(rutaArchivoAntiguo);
@@ -232,7 +256,7 @@ exports.actualizarBlogIdByUser = async (req, res, next) => {
     } else {
         // Obtener el caso anterior para mantener el nombre del documento
         let blogAnterior = await Blogs.findByPk(req.params.idBlogs);
-        nuevoBlog.documentos = blogAnterior.documentos;
+        nuevoBlog.imagen = blogAnterior.imagen;
     }
 
     // Actualizar el caso en la base de datos y obtener el número de filas afectadas
@@ -243,7 +267,7 @@ exports.actualizarBlogIdByUser = async (req, res, next) => {
     // Verificar si se actualizó con éxito
     if (numFilasActualizadas > 0) {
         // Obtener el caso actualizado después de la actualización
-        const blogActualizado = await Eventos.findByPk(req.params.idBlogs);
+        const blogActualizado = await Blogs.findByPk(req.params.idBlogs);
 
         // Enviar la respuesta JSON con el caso actualizado
         res.json(blogActualizado);
@@ -280,8 +304,8 @@ exports.eliminarBlogIdByUser = async(req,res,next) => {
         }
 
         // Verificar y eliminar el archivo asociado al caso (si existe)
-        if (blog.documentos) {
-            const rutaArchivo = path.join(__dirname, `../uploads/blog/${blog.documentos}`);
+        if (blog.imagen) {
+            const rutaArchivo = path.join(__dirname, `../uploads/blogs/${blog.imagen}`);
             await fs.unlink(rutaArchivo);
         }
 
@@ -300,28 +324,3 @@ exports.eliminarBlogIdByUser = async(req,res,next) => {
         next(error);
     }
 }
-
-exports.eliminarBlog = async (req, res, next) => {
-    try {
-        const blogAEliminar = await Blogs.findByPk(req.params.idBlogs);
-
-        if (!blogAEliminar) {
-            return res.status(404).json({ mensaje: 'Caso no encontrado' });
-        }
-
-        // Borrar el archivo asociado al caso si existe
-        if (blogAEliminar.documentos) {
-            const rutaArchivo = path.join(__dirname, `../uploads/blog/${blogAEliminar.documentos}` );
-            await fs.unlink(rutaArchivo);
-        }
-
-         // Eliminar el caso de la base de datos
-        await blogAEliminar.destroy();
-
-        //console.log('Ruta del archivo a eliminar:', rutaArchivo); verificar la ruta
-        res.json({ mensaje: 'blog eliminado exitosamente' });
-    } catch (error) {
-        console.log(error);
-        next(error);
-    }
-};

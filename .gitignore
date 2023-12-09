@@ -1,3 +1,13 @@
 
+
 *.pdf
 *.png
+
+/shelf/
+/workspace.xml
+/httpRequests/
+.env
+*.pdf
+config/db.js
+*.png
+.env

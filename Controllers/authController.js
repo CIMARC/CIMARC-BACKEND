@@ -40,7 +40,10 @@ exports.usuarioAutenticado = async (req, res, next) => {
 
         // Definir las rutas permitidas para cada rol
         const rutasPermitidas = {
+
             'admin': ['/admin/home', '/admin/register','/admin/noticiaRegister', '/admin/blogRegister','/admin/mantenimientoUsu','/cerrar-sesion'],
+
+            'admin': ['/admin/home', '/admin/register', '/admin/blogRegister','/admin/mantenimientoUsu','/cerrar-sesion'],
             'trabajador': ['/trabajador/home', '/cerrar-sesion'],
             'cliente': ['/cliente/home','/cerrar-sesion','/cliente/AddDocument']
         };

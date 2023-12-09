@@ -37,12 +37,7 @@ const Blogs =  db.define('Blogs',{
     },
     imagen:{
         type:DataTypes.STRING(100)
-    },
-    userid: {
-        type: DataTypes.UUID,
-        allowNull: false,
-    },
-
+    }
 
 });
 // // Definir la relación entre Usuario y Blogs

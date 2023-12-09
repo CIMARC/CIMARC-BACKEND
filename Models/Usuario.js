@@ -1,5 +1,3 @@
-//<<<<<<< Updated upstream
-//=======
 const { DataTypes } = require('sequelize');
 const db = require('../config/db.js');
 const bcrypt = require('bcrypt');
@@ -12,7 +10,7 @@ const Usuario = db.define('user', {
         primaryKey: true,
     },
     email: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING(30),
         allowNull: false,
          validate:{
              isEmail:{msg: 'Agrega un correo valido'},
@@ -81,4 +79,3 @@ Usuario.prototype.validarPassword = function(password) {
 }
 
 module.exports = Usuario;
-//>>>>>>> Stashed changes

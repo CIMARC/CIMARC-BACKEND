@@ -17,11 +17,15 @@ exports.CrearPagos = async (req, res, next) => {
 exports.obtenerPagos = async (req, res) => {
     try {
         const pagos = await Pagos.findAll();
-        res.send(pagos);
-    } catch (error) {
+        if (pagos.length === 0) {
+            res.status(404).send('No hay datos disponibles');
+        } else {
+            res.send(pagos);
+        }    } catch (error) {
         res.status(500).send('Hubo un error');
     }
 };
+
 // Mostrar casos
 exports.mostrarPagos = async(req,res,next) =>{
     
