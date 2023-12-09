@@ -23,8 +23,76 @@ const BlogsController=require('../Controllers/BlogsController.js')
 module.exports = function () {
 
 
+<<<<<<< Updated upstream
     /** PAGOS */
     //Agregar pagos
+=======
+    //**-----------------------ADMIN------------------**/
+    /**HOME*/
+    router.get('/admin/home',
+        authController.usuarioAutenticado,
+        AdminHomeController.homeAdmin
+    );
+    /**Blog*/
+    router.get('/admin/blogRegister',
+        authController.usuarioAutenticado,
+        AdminHomeController.blogRegister);
+    
+    /**Blog*/
+    router.get('/admin/noticiaRegister',
+        authController.usuarioAutenticado,
+        AdminHomeController.noticiaRegister);
+    
+    /**Mantenimiento Usuarios */
+    router.get('/admin/mantenimientoUsu',
+        authController.usuarioAutenticado,
+        AdminHomeController.formMantenimientoUsu
+    )
+    /** Register**/
+    router.get('/admin/register',
+        authController.usuarioAutenticado,
+        AdminHomeController.register
+    );
+
+    //**-----------------------Cliente------------------**/
+    /**HOME*/
+    router.get('/cliente/home',
+        authController.usuarioAutenticado,
+        ClienteHomeController.homeCliente
+    );
+    /**Subir Documentos */
+    router.get('/cliente/AddDocument',
+        authController.usuarioAutenticado,
+        ClienteHomeController.SubirDocumentosCliente
+    );
+
+    //**-----------------------Trabajador------------------**/
+    /**HOME*/
+    router.get('/trabajador/home',
+        authController.usuarioAutenticado,
+        TrabajadorHomeController.homeTrabajador
+    );
+
+
+
+
+
+
+
+
+
+    /**INICIO DE SESION */
+
+    router.get('/iniciar-sesion',UsuarioController.formIniciarSesion);
+    
+    router.post('/iniciar-sesion', authController.autenticarUsuario);
+    // cerrar sesion
+    router.get('/cerrar-sesion',
+        authController.usuarioAutenticado,
+        authController.cerrarSesion
+    );
+    /** METODOS DE PAGOS */
+>>>>>>> Stashed changes
     router.post('/pagos',
         PagosController.CrearPagos
     );
