@@ -31,14 +31,17 @@ module.exports = function () {
         authController.usuarioAutenticado,
         AdminHomeController.homeAdmin
     );
+    /**Blog*/
+    router.get('/admin/blogRegister',
+        authController.usuarioAutenticado,
+        AdminHomeController.blogRegister);
+    
+    /**Mantenimiento Usuarios */
+    router.get('/admin/mantenimientoUsu',
+        authController.usuarioAutenticado,
+        AdminHomeController.formMantenimientoUsu
+    )
     /** Register**/
-
-    router.get('/admin/register',AdminHomeController.register);
-
-    router.get('/admin/blogRegister',AdminHomeController.blogRegister);
-
-    router.get('/admin/home',AdminHomeController.homeAdmin);
-
     router.get('/admin/register',
         authController.usuarioAutenticado,
         AdminHomeController.register
@@ -50,7 +53,11 @@ module.exports = function () {
         authController.usuarioAutenticado,
         ClienteHomeController.homeCliente
     );
-
+    /**Subir Documentos */
+    router.get('/cliente/AddDocument',
+        authController.usuarioAutenticado,
+        ClienteHomeController.SubirDocumentosCliente
+    );
 
     //**-----------------------Trabajador------------------**/
     /**HOME*/
