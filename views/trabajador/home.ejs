@@ -1,0 +1,43 @@
+<div class="content">
+    <div>
+        <a href="/cliente/AddDocument" class="boton-derecha">Subir Casos</a>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="lista-usuarios">
+        <h1>Listado de Casos</h1>
+        <% if (DocumentosCasos.length > 0) { %>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Titulo</th>
+                        <th>descripcion</th>
+                        <th>fecha</th>
+                        <th>pago</th>
+                        <th>documentos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% DocumentosCasos.forEach(docworker => { %>
+                        <tr>
+                            <td><%= docworker.titulo %></td>
+                            <td><%= docworker.descripcion %></td>
+                            <td><%= docworker.fecha %></td>
+                            <td><%= docworker.pago %></td>
+                            <td>
+                                <% if (docworker.formato) { %>
+                                    <a href="../../uploads/documentocliente/<%= documentCliente.formato %>" download><%= documentCliente.formato %></a>
+                                <% } else { %>
+                                    Sin archivo
+                                <% } %>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <p>No hay archivos para mostrar.</p>
+        <% } %>
+    </div>
+</div>
