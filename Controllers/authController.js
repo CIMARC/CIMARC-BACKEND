@@ -9,7 +9,7 @@ exports.autenticarUsuario = (req, res, next) => {
 
         if (!usuario) {
             // Puedes manejar la lógica de redirección en caso de falla aquí
-            return res.redirect('/iniciar-sesion');
+            return res.render('iniciar-sesion', { error: info.message });
         }
 
         // Define las rutas según el rol del usuario

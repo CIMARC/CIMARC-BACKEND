@@ -1,36 +1,69 @@
-<section>
-    <div class="contenedor">
-        <div class="imagenCimarc">
-        </div>
-        <div class="formulario">
-            <form action="/iniciar-sesion" method="POST">
-                <div>
-                    <img src="assets/images/Cimarc.png" alt="" style="width: 60%;">
-                </div>
-                <br>
-                <h2>Iniciar Sesión</h2>
-                <div class="input-contenedor">
-                    <i class="fa-solid fa-user"></i>
-                    <input type="email" name="email" required>
-                    <label >Email</label>
-                </div>
-                <div class="input-contenedor">
-                    <i class="fa-solid fa-user"></i>
-                    <input type="password" name="password" required>
-                    <label >Contraseña</label>
-                </div>
-                <div class="recordar">
-                    <label for="#">
-                        <input type="checkbox">Recordar la Contraseña
-                    </label>
-                    <a href="/contrasena">Olvidaste tu contraseña?</a>
-                </div>
-                <br>
-                <div class="button">
-                    <input type="submit" class="btn" value="Iniciar Sesion">
-                </div>
+<head>
+    <style>
+      .alert-custom {
+        color: #ffffff; /* Letras blancas */
+        background-color: #ff0000; /* Fondo rojo */
+        border-color: #dc3545;
+        padding: 5px; /* Reduce el padding */
+        margin: 20px 0; /* Agrega un margen en la parte superior e inferior */
+        border: 1px solid transparent;
+        border-radius: 4px;
+        width: 50%; /* Reduce el ancho del rectángulo a la mitad */
+        text-align: center;
+        margin-left: auto; /* Centra el rectángulo en la página */
+        margin-right: auto;
+        font-family: Arial, sans-serif; /* Tipo de letra atractivo */
+        font-size: 14px; /* Reduce el tamaño de la letra */
+      }
+      h2 {
+        font-family: 'Arial', sans-serif; /* Tipo de letra atractivo */
+        font-size: 24px; /* Tamaño de la letra */
+        color: #000000; /* Color de la letra */
+        text-align: center; /* Centra el texto */
+        margin-bottom: 20px; /* Agrega un espacio después del texto */
+    }
 
-            </form>
-        </div>
-    </div>
-</section>
+    </style>
+  </head>
+  <section>
+      <div class="contenedor">
+          <div class="imagenCimarc">
+          </div>
+          <div class="formulario">           
+              <form action="/iniciar-sesion" method="POST">
+                  <div>
+                      <img src="assets/images/Cimarc.png" alt="" style="width: 60%;">
+                  </div>
+                  <br>
+                  <h2>Iniciar Sesión</h2>
+                  <% if (locals.error && locals.error.length > 0) { %>
+                    <div class="alert-custom">
+                      <%= locals.error %>
+                    </div>
+                  <% } %>                   
+                  <div class="input-contenedor">
+                      <i class="fa-solid fa-user"></i>
+                      <input type="email" name="email" required>
+                      <label >Email</label>
+                  </div>
+                  <div class="input-contenedor">
+                      <i class="fa-solid fa-user"></i>
+                      <input type="password" name="password" required>
+                      <label >Contraseña</label>
+                  </div>
+                  <div class="recordar">
+                      <label for="#">
+                          <input type="checkbox">Recordar la Contraseña
+                      </label>
+                      <a href="/contrasena">Olvidaste tu contraseña?</a>
+                  </div>
+                  <br>
+                  <div class="button">
+                      <input type="submit" class="btn" value="Iniciar Sesion">
+                  </div>
+  
+              </form>
+          </div>
+      </div>
+  </section>
+  

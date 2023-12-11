@@ -2,11 +2,21 @@ const Usuario = require('../Models/Usuario');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 
-exports.formIniciarSesion = (req,res) =>{
-    res.render('iniciar-sesion',{
+exports.formIniciarSesion = async (req, res) => {
+    const error = req.query.error;
+  
+    if (error) {
+      res.render('iniciar-sesion', {
+        isHome: false,
+        error: 'Cuenta no verificada'
+      });
+    } else {
+      res.render('iniciar-sesion', {
         isHome: false
-    });
-}
+      });
+    }
+  };
+  
 exports.crearUsuario = async (req, res, next) => {
     const usuarios = new Usuario(req.body);
     try {
@@ -19,7 +29,24 @@ exports.crearUsuario = async (req, res, next) => {
         next();
     }
 };
-
+exports.iniciarSesion = async (req, res, next) => {
+    const { email, password } = req.body;
+  
+    // Aquí iría tu código para buscar al usuario en la base de datos utilizando el email
+    const usuario = await Usuario.findOne({ where: { email: email } });
+  
+    if (usuario) {
+      if (usuario.activo !== 1) {
+        // Redirige al usuario de vuelta a la página de inicio de sesión con un mensaje de error
+        res.redirect('/iniciar-sesion?error=Cuenta no verificada');
+      } else {
+        // Aquí iría tu código para verificar la contraseña y iniciar la sesión del usuario
+      }
+    } else {
+      // Si no se encuentra al usuario, redirige con un mensaje de error
+      res.redirect('/iniciar-sesion?error=Usuario no encontrado');
+    }
+  };
 
 exports.obtenerUsuarios = async (req, res) => {
     try {
@@ -94,42 +121,3 @@ exports.eliminarUsuario = async (req, res) => {
     }
 };
 
-// exports.autenticarUsuario = async (req, res, next) => {
-//     try {
-//         // Buscar el usuario
-//         const { email, password } = req.body;
-//         const usuario = await Usuario.findOne({ where: { email } });
-
-//         if (!usuario) {
-//             // Si el usuario no existe
-//             return res.status(401).json({ mensaje: 'Ese usuario no existe' });
-//         }
-
-//         // Verificar si la contraseña es correcta
-//         const contrasenaCorrecta = await bcrypt.compare(password, usuario.password);
-
-//         if (!contrasenaCorrecta) {
-//             // Si la contraseña es incorrecta
-//             return res.status(401).json({ mensaje: 'Contraseña incorrecta' });
-//         }
-
-//         // Contraseña correcta, firma el token
-//         const token = jwt.sign(
-//             {
-//                 email: usuario.email,
-//                 usuario: usuario.nombre,
-//                 _id: usuario.id,
-//             },
-//             process.env.JWT_SECRET || 'LLAVESECRETA',
-//             {
-//                 expiresIn: '1h',
-//             }
-//         );
-
-//         // Retornar el TOKEN
-//         return res.json({ token });
-//     } catch (error) {
-//         console.error('Error en autenticarUsuario:', error);
-//         return res.status(500).json({ mensaje: 'Error interno del servidor' });
-//     }
-// };

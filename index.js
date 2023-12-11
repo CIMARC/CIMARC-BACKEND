@@ -23,6 +23,12 @@ const db = require('./config/db.js');
 // crear el servidor
 const app = express();
 
+// Middleware para añadir la variable isHome a todas las rutas
+app.use(function(req, res, next) {
+  res.locals.isHome = false; // o false, dependiendo de tu lógica
+  next();
+});
+
 
 // crear la session
 app.use(session({

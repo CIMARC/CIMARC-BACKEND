@@ -60,8 +60,14 @@ module.exports = function () {
 
 
     /**INICIO DE SESION */
-
-    router.get('/iniciar-sesion',UsuarioController.formIniciarSesion);
+    router.get('/iniciar-sesion', (req, res) => {
+        UsuarioController.formIniciarSesion(req, res);
+        res.render('iniciar-sesion', { 
+          error: req.flash('error'),
+          isHome: false // o true, dependiendo de tu lógica
+        });
+    });
+    
     
     router.post('/iniciar-sesion', authController.autenticarUsuario);
 
