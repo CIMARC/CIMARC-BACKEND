@@ -7,20 +7,132 @@ const UsuarioController = require('../Controllers/UsuarioController.js');
 const NoticiasController = require('../Controllers/NoticiasController.js');
 const EventosController=require('../Controllers/EventoController.js')
 const BlogsController=require('../Controllers/BlogsController.js');
-
-
+const authController = require('../Controllers/authController.js');
+const ClienteHomeController = require('../Controllers/Frontend/cliente/homeController.js'); 
+const AdminHomeController = require('../Controllers/Frontend/admin/homeController.js');
+const TrabajadorHomeController = require('../Controllers/Frontend/trabajador/homeController.js');
+const homeController = require('../Controllers/homeController.js')
 
 module.exports = function () {
 
+    
+    /** HOME*/
+    router.get('/',homeController.home)
+
+    //** Contacto Us**/
+    router.get('/contactos',homeController.Contactos)
+
+
+    /**Service*/
+    router.get('/service',homeController.service);
+    router.get('/service/conciliacion',homeController.serviceConciliacion);
+    router.get('/service/arbitraje',homeController.ServiceArbitraje);
+
+
+    /**sobre nosotros */
+    router.get('/about',homeController.about);
+
+   
+
+
+    /**Olvide contraseña */
+    router.get('/contrasena',(req,res) => {
+        res.render('contrasena',{
+            isHome: false,
+            isCliente: false,
+            isJobs: false,
+            isAdmin: false,
+            isFooter: false
+        });
+    })
+
+    
+   
+
+
+
+    //**-----------------------ADMIN------------------**/
+    /**HOME*/
+    router.get('/admin/home',
+        authController.usuarioAutenticado,
+        AdminHomeController.homeAdmin
+    );
+    /**Blog*/
+    router.get('/admin/blogRegister',
+        authController.usuarioAutenticado,
+        AdminHomeController.blogRegister);
+
+    /**Eventos*/
+     router.get('/admin/eventos',
+     authController.usuarioAutenticado,
+     AdminHomeController.eventos);
+    
+    /**Mantenimiento Usuarios */
+    router.get('/admin/mantenimientoUsu',
+        authController.usuarioAutenticado,
+        AdminHomeController.formMantenimientoUsu
+    )
+    /** Register**/
+    router.get('/admin/register',
+        authController.usuarioAutenticado,
+        AdminHomeController.register
+    );
+
+    /**NOTICIA**/
+     router.get('/admin/noticiaRegister',
+     authController.usuarioAutenticado,
+     AdminHomeController.noticiaRegister
+     );
+
+    //**-----------------------Cliente------------------**/
+    /**HOME*/
+    router.get('/cliente/home',
+        authController.usuarioAutenticado,
+        ClienteHomeController.homeCliente
+    );
+    /**Subir Documentos */
+    router.get('/cliente/AddDocument',
+        authController.usuarioAutenticado,
+        ClienteHomeController.SubirDocumentosCliente
+    );
+
+    //**-----------------------Trabajador------------------**/
+    /**HOME*/
+    router.get('/trabajador/home',
+        authController.usuarioAutenticado,
+        TrabajadorHomeController.homeTrabajador
+    );
+
+    router.get('/trabajador/pagoRegister',
+        authController.usuarioAutenticado,
+        TrabajadorHomeController.pagoRegister
+    );
+
+
+
+
+
+
+
+
+
+
 
     /**INICIO DE SESION */
-    router.post('/iniciar-sesion',
-        UsuarioController.autenticarUsuario
+
+    router.get('/iniciar-sesion',UsuarioController.formIniciarSesion);
+    
+    router.post('/iniciar-sesion', authController.autenticarUsuario);
+    // cerrar sesion
+    router.get('/cerrar-sesion',
+        authController.usuarioAutenticado,
+        authController.cerrarSesion
     );
     /** METODOS DE PAGOS */
     router.post('/pagos',
         PagosController.CrearPagos
     );
+
     //Obtener pagos
     router.get('/pagos',
 
@@ -205,20 +317,20 @@ module.exports = function () {
     );
 
     //Mostrar Documento en especifico 
-    router.get('/documento/user/:userid/doccliente/:idDocCliente',
+    router.get('/documento/:idDocCliente/user/:userid',
 
         DocClienteController.buscarDocByUser
     );
 
     //actualizar Documento ByUserId y DocumentoId
-    router.put('/documento/user/:userid',
+    router.put('/documento/:idDocCliente/user/:userid',
 
         DocClienteController.subirArchivo,
         DocClienteController.actualizarDocIdByUser
     );
 
     //Eliminar Documentos ByUserId y DocumentoId
-    router.delete('/documento/user/:userid/doccliente/:idDocCliente',
+    router.delete('/documento/:idDocCliente/user/:userid',
 
         DocClienteController.eliminarDocIdByUser
     );
@@ -338,11 +450,7 @@ module.exports = function () {
         
         BlogsController.eliminarBlogIdByUser
 
-
     );
-
-    
-//>>>>>>> ad1e997cecc4350135a6b13dfe3a79f80b3ad182
 
     return router;
 }
