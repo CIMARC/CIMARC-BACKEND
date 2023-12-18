@@ -16,7 +16,7 @@
   <br> <br> <br>
   <div class="seccion-formulario">
     <h1>Registro de Blog</h1>
-    <form action="/blogs" method="POST">
+    <form action="/blogs" method="POST" enctype="multipart/form-data">
      
         <label for="titulo">Título:</label>
         <input type="text" class="form-control" id="titulo" name="titulo" required>
@@ -30,12 +30,12 @@
         <label for="descripcion">Descripción:</label>
         <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
       
-        <label for="foto">Foto:</label>
-        <input type="file" class="form-control-file" id="foto" name="foto" accept="image/*" onchange="previewImage()">
+        <label for="imagen">Foto:</label>
+        <input type="file" name="imagen">
 
         <button type="submit" class="btn btn-primary">Registrar</button>
 
-      </form>
+    </form>
   </div>
 </div>
 </body>
