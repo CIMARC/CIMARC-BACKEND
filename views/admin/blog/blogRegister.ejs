@@ -27,12 +27,13 @@
         <label for="fecha">Fecha:</label>
         <input type="date" class="form-control" id="fecha" name="fecha" required>
 
-        <label for="categoria">Categoría:</label>
-        <!-- Cambiado a un campo de selección múltiple -->
-        <select class="form-control" id="categoria" name="categoria" multiple required>
-            <!-- Opciones de categorías -->
+
+
+        <label for="categorias">Categorías:</label>
+        <select id="categorias" name="categorias[]" multiple>
             <option value="categoria1">Categoría 1</option>
             <option value="categoria2">Categoría 2</option>
+            <option value="categoria3">Categoría 3</option>
             <!-- Agrega más opciones según sea necesario -->
         </select>
 

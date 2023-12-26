@@ -55,24 +55,43 @@ exports.subirArchivoBlog = (req, res, next) => {
     });
 };
 // Agregar Blogs
-exports.nuevoBlog = async(req,res,next) =>{
-    const blog = new Blogs(req.body);
-    blog.userid = req.user.id;
-    try{
-         // Verificar si se ha subido un documento
-        if( req.file && req.file.filename){
+exports.nuevoBlog = async (req, res, next) => {
+    const categoriasSeleccionadas = req.body['categorias[]'];
+
+    // Convierte las categorías en un array
+    const categorias = Array.isArray(categoriasSeleccionadas)
+        ? categoriasSeleccionadas
+        : [categoriasSeleccionadas];
+
+    try {
+        const blog = new Blogs({
+            titulo: req.body.titulo,
+            descripcion: req.body.descripcion,
+            fecha: req.body.fecha,
+            // Añade el resto de los campos del modelo Blogs según tu esquema
+            // ...
+
+            // Almacena las categorías y el usuario relacionado
+            categoria: categorias,
+            userid: req.user.id
+        });
+
+        // Verifica si se ha subido un documento
+        if (req.file && req.file.filename) {
             blog.imagen = req.file.filename;
         }
-        //almacenar un registro
+
+        // Almacena el registro del blog
         await blog.save();
+        
+        // Redirige a la página de administración de blogs
         res.redirect('/admin/blog');
-    }catch(error){
-        //si hay un error
+    } catch (error) {
+        // Si hay un error, envíalo al siguiente middleware de error o envíalo como respuesta
         res.send(error);
         next();
     }
-
-}
+};
 // Mostrar Eventos
 exports.mostrarBlog = async(req,res,next) =>{
     

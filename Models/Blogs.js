@@ -32,15 +32,30 @@ const Blogs =  db.define('Blogs',{
         }
     },
     categoria: {
-        type: DataTypes.TEXT,
+        type: DataTypes.JSON, // Almacenar un arreglo JSON de strings
         allowNull: false,
+        defaultValue: '[]', // Valor por defecto: un arreglo vacío
         get() {
-            // Parsea la cadena JSON almacenada en la base de datos
-            return JSON.parse(this.getDataValue('categoria'));
+            const categoriaValue = this.getDataValue('categoria');
+            return categoriaValue ? JSON.parse(categoriaValue) : [];
         },
         set(value) {
-            // Convierte el valor a cadena JSON antes de almacenarlo
-            this.setDataValue('categoria', JSON.stringify(value));
+            // Obtener el valor actual de categorías
+            let categorias = this.getDataValue('categoria');
+            categorias = categorias ? JSON.parse(categorias) : [];
+
+            // Verificar si el valor es un string o un arreglo de strings
+            if (typeof value === 'string') {
+                // Agregar la nueva categoría al arreglo existente
+                categorias.push(value);
+            } else if (Array.isArray(value)) {
+                // Agregar múltiples categorías al arreglo existente
+                categorias = categorias.concat(value);
+            }
+
+            // Eliminar duplicados y asignar el nuevo arreglo de categorías como JSON
+            categorias = [...new Set(categorias)]; // Eliminar duplicados
+            this.setDataValue('categoria', JSON.stringify(categorias));
         }
     },
     imagen:{
