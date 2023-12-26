@@ -31,6 +31,8 @@ module.exports = function () {
     router.get('/documentacion',homeController.documentacion)
     //**Blogs */
     router.get('/blogs',homeController.Blogs);
+    router.get('/blogs/:id',homeController.blogdetail)
+
     /**Service*/
     router.get('/service',homeController.service);
     router.get('/service/conciliacion',homeController.serviceConciliacion);
