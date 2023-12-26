@@ -404,9 +404,7 @@ module.exports = function () {
 
      //Agregar Eventos
      router.post('/eventos',
-
         EventosController.subirArchivo,
-        //EventosController.subirImagen,
         EventosController.nuevoEvento
      )
 
