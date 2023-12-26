@@ -111,6 +111,43 @@ exports.documentacion = (req,res) =>{
         isFooter: true
     })
 }
+
+exports.blogdetail = async (req, res) => {
+    // Obtener el ID de la noticia desde los parámetros de la URL
+    const blogid = req.params.id;
+    const blogs= await blog.findByPk(blogid, {
+        include: usuarios,
+      });    // Lógica para obtener los detalles de la noticia con el ID proporcionado
+    // Esta lógica dependerá de cómo recuperas los datos de la noticia en tu aplicación
+
+    // Renderizar la vista de detalle de la noticia (por ejemplo, 'detalleNoticia.ejs')
+    res.render('public/blog-detail', {     isHome: true,
+        isCliente: false,
+        isJobs: false,
+        isAdmin: false,
+        isFooter: true,
+        blogs }); // Pasar el ID de la noticia a la vista
+}
+
+
+exports.eventoDetail = async (req, res) => {
+    // Obtener el ID de la noticia desde los parámetros de la URL
+    const eventoId = req.params.id;
+    const evento= await Eventos.findByPk(eventoId, {
+        include: usuarios,
+      });    // Lógica para obtener los detalles de la noticia con el ID proporcionado
+    // Esta lógica dependerá de cómo recuperas los datos de la noticia en tu aplicación
+
+    // Renderizar la vista de detalle de la noticia (por ejemplo, 'detalleNoticia.ejs')
+    res.render('public/evento-detail', {     isHome: true,
+        isCliente: false,
+        isJobs: false,
+        isAdmin: false,
+        isFooter: true,
+        evento }); // Pasar el ID de la noticia a la vista
+}
+
+
 exports.noticiaDetail = async (req, res) => {
     // Obtener el ID de la noticia desde los parámetros de la URL
     const noticiaId = req.params.id;
