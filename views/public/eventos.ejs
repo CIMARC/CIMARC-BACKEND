@@ -4,13 +4,7 @@
       <img src="assets/images/banner/evento.png" alt="banner" />
     </div>
     <div class="container">
-      <div class="heading-nav gap-4 mt-32">
-        <a class="hover-underline caption1 text-white" href="index.html"
-          >Home</a
-        ><i class="ph ph-caret-double-right text-white"></i>
-        <div class="caption1 text-white">Eventos</div>
-      </div>
-      <div class="text-nav">
+      <div class="text-nav" style="padding-top: 65px;">
         <div class="heading3 text-white">Eventos</div>
         <div class="sub-heading mt-8 text-white fw-400">
           Experimenta resoluciones justas y eficientes con nuestro servicio de conciliación y arbitraje. Soluciones rápidas para conflictos comerciales. ¡Transformamos desafíos en acuerdos sólidos!
@@ -21,9 +15,8 @@
 
   <div class="blog-list mt-100">
       <div class="container"> 
-
-        <% eventos.forEach(evento => { %>
         <div class="col-12 col-lg-8 flex-column row-gap-40">
+          <% eventos.forEach(evento => { %>
               <a class="row blog-item row-gap-20 item-filter" href="/eventos/<%= evento.id %>" data-name="<%= evento.categoria %>">
                   <div class="col-12 col-md-6">
                       <div class="bg-img w-100 overflow-hidden bora-16">
@@ -57,8 +50,7 @@
                       <div class="read fw-700 text-underline">Leer más</div>
                   </div>
               </a>
-            </div>
-
+              
           <% }); %>
       
           <!-- Navegación Paginada -->
@@ -68,6 +60,13 @@
               <div class="nav-item bora-4 bg-surface text-button w-40 h-40 flex-center border-line-1px" data-name="tab-two">2</div>
               <div class="nav-item bora-4 bg-surface text-button w-40 h-40 flex-center border-line-1px" data-name="tab-three">3</div>
           </div>
+       </div>
+
+       <div class="col-12 col-lg-4 pl-55">
+        <div class="search-block bora-8 bg-surface">
+          <input class="bora-8 bg-surface w-100" type="text" placeholder="Search" />
+          <i class="ph ph-magnifying-glass"></i>
+      </div>
         <div class="cate-block mt-40">
           <div class="heading7">Categories</div>
           <div class="list-nav mt-16">
@@ -179,3 +178,4 @@
     ><i class="ph-bold ph-caret-up"></i
   ></a>
   <div class="pb-100"></div>
+</div>
