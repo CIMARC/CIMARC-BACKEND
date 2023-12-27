@@ -2,13 +2,15 @@ const Noticias = require('../../../Models/Noticias');
 const Eventos= require('../../../Models/Eventos');
 const usuarios = require('../../../Models/Usuario');
 const blog=require('../../../Models/Blogs');
-exports.home = (req,res) =>{
+exports.home = async (req,res) =>{
+    const noticias = await Noticias.findAll({ include: usuarios });
     res.render('public/home',{
         isHome: true,
         isCliente: false,
         isJobs: false,
         isAdmin: false,
-        isFooter: true
+        isFooter: true,
+        noticias: noticias,
 });
 }
 exports.terminos = (req,res) =>{
