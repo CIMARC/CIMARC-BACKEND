@@ -11,6 +11,15 @@ exports.home = (req,res) =>{
         isFooter: true
 });
 }
+exports.terminos = (req,res) =>{
+    res.render('public/terminos',{
+        isHome: true,
+        isCliente: false,
+        isJobs: false,
+        isAdmin: false,
+        isFooter: true
+});
+}
 exports.service = (req,res) =>{
     res.render('public/service',{
         isHome: true,
