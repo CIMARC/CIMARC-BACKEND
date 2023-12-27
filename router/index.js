@@ -28,6 +28,8 @@ module.exports = function () {
     router.get('/noticias',homeController.NoticiasVista)
     router.get('/noticias/:id',homeController.noticiaDetail)
     router.get('/home6',homeController.home6)
+    router.get('/terminos',homeController.terminos)
+
     router.get('/documentacion',homeController.documentacion)
     //**Blogs */
     router.get('/blogs',homeController.Blogs);
