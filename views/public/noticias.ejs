@@ -30,7 +30,7 @@
           <% const limitedDescription = noticia.descripcion.slice(0, 150).replace(/<[^>]+>/g, ''); %>
 
 
-        <div class="col-12 col-lg-8 flex-column row-gap-40">
+            <div class="col-12 col-lg-8 flex-column row-gap-40">
               <a class="row blog-item row-gap-20 item-filter" href="/noticias/<%= noticia.id %>" data-name="<%= noticia.categoria %>">
                   <div class="col-12 col-md-6">
                       <div class="bg-img w-100 overflow-hidden bora-16">
@@ -38,11 +38,13 @@
                       </div>
                   </div>
                   <div class="col-12 col-md-6">
-                      <div class="caption2 pt-4 pb-4 pl-12 pr-12 bg-surface bora-40 display-inline-block">
-                        <%- noticia.categoria %>
-                        <%- noticia.categoria %>
-                        <%- noticia.categoria %>
-
+                      <div class="list-tag mt-16 d-flex flex-wrap gap-12"
+                      >
+                      <% categorias.forEach(c => { %>
+                        <a class="caption2 pt-8 pb-8 pl-16 pr-16 bg-surface bora-20 hover-button-black" href="#!">
+                          <%= c %>
+                        </a>
+                      <% }); %>
                       </div>
                       <div class="heading6 mt-8">
                           <%- noticia.titulo %>
@@ -65,7 +67,7 @@
                           <%= limitedDescription %>....
                       </div>
                       <div class="read fw-700 text-underline">Leer más</div>
-                  </div>
+                    </div>
               </a>
             </div>
 
