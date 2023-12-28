@@ -58,6 +58,7 @@ exports.subirArchivoBlog = (req, res, next) => {
 exports.nuevoBlog = async(req,res,next) =>{
     const blog = new Blogs(req.body);
     blog.userid = req.user.id;
+    
     try{
          // Verificar si se ha subido un documento
         if( req.file && req.file.filename){

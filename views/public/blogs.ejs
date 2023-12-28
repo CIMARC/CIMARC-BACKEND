@@ -19,6 +19,13 @@
           <div class="container"> 
     
             <% blogs.forEach(blog => { %>
+              <% let categoriaString = blog.categoria; %>
+              <% if (typeof categoriaString === 'object') { %>
+                <% categoriaString = JSON.stringify(categoriaString); %>
+              <% } %>
+              <% categoriaString = categoriaString.replace(/'/g, '"'); %>
+              <% const categorias = JSON.parse(categoriaString); %>
+             
               <div class="col-12 col-lg-8 flex-column row-gap-40" >
                 <a
                   class="row blog-item row-gap-20 item-filter"
@@ -35,10 +42,15 @@
                   </div>
                   <div class="col-12 col-md-6">
                     <div
-                      class="caption2 pt-4 pb-4 pl-12 pr-12 bg-surface bora-40 display-inline-block"
+                    class="list-tag mt-16 d-flex flex-wrap gap-12"
                     >
-                    <%- blog.categoria -%>
+                    <% categorias.forEach(c => { %>
+                      <a class="caption2 pt-8 pb-8 pl-16 pr-16 bg-surface bora-20 hover-button-black" href="#!">
+                        <%= c %>
+                      </a>
+                    <% }); %>
                     </div>
+                    
                     <div class="heading6 mt-8">
                       <%- blog.titulo -%>
                     </div>
