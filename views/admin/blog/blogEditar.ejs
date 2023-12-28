@@ -34,10 +34,35 @@
         <label for="categoria">Categoría:</label>
         <!-- Cambiado a un campo de selección múltiple -->
         <select class="form-control" id="categoria" name="categoria" multiple required>
-            <!-- Opciones de categorías -->
-            <option value="categoria1">Categoría 1</option>
-            <option value="categoria2">Categoría 2</option>
-            <!-- Agrega más opciones según sea necesario -->
+            <!-- Opciones adicionales -->
+            <option value="paper" <%= blog.categoria.includes('paper') ? 'selected' : '' %>>Paper</option>
+            <option value="articulo" <%= blog.categoria.includes('articulo') ? 'selected' : '' %>>Artículo</option>
+            <option value="analisis de caso" <%= blog.categoria.includes('analisis de caso') ? 'selected' : '' %>>Análisis de Caso</option>
+            <option value="parte solicitante" <%= blog.categoria.includes('parte solicitante') ? 'selected' : '' %>>Parte Solicitante</option>
+            <option value="parte invitada" <%= blog.categoria.includes('parte invitada') ? 'selected' : '' %>>Parte Invitada</option>
+            <option value="corporativo" <%= blog.categoria.includes('corporativo') ? 'selected' : '' %>>Corporativo</option>
+            <option value="tip" <%= blog.categoria.includes('tip') ? 'selected' : '' %>>Tip</option>
+            <option value="leyes" <%= blog.categoria.includes('leyes') ? 'selected' : '' %>>Leyes</option>
+            <option value="cajamarca" <%= blog.categoria.includes('cajamarca') ? 'selected' : '' %>>Cajamarca</option>
+            <option value="comercial" <%= blog.categoria.includes('comercial') ? 'selected' : '' %>>Comercial</option>
+            <option value="arbitraje" <%= blog.categoria.includes('arbitraje') ? 'selected' : '' %>>Arbitraje</option>
+            <option value="arbitraje y contrataciones con el estado" <%= blog.categoria.includes('arbitraje y contrataciones con el estado') ? 'selected' : '' %>>Arbitraje y Contrataciones con el Estado</option>
+            <option value="arbitraje y comercial" <%= blog.categoria.includes('arbitraje y comercial') ? 'selected' : '' %>>Arbitraje y Comercial</option>
+            <option value="arbitraje y civil" <%= blog.categoria.includes('arbitraje y civil') ? 'selected' : '' %>>Arbitraje y Civil</option>
+            <option value="arbitraje express" <%= blog.categoria.includes('arbitraje express') ? 'selected' : '' %>>Arbitraje Express</option>
+            <option value="arbitraje de menor cuantia" <%= blog.categoria.includes('arbitraje de menor cuantia') ? 'selected' : '' %>>Arbitraje de Menor Cuantía</option>
+            <option value="arbitraje alta cuantia" <%= blog.categoria.includes('arbitraje alta cuantia') ? 'selected' : '' %>>Arbitraje Alta Cuantía</option>
+            <option value="arbitraje de emergencia" <%= blog.categoria.includes('arbitraje de emergencia') ? 'selected' : '' %>>Arbitraje de Emergencia</option>
+            <option value="conciliación extrajudicial" <%= blog.categoria.includes('conciliación extrajudicial') ? 'selected' : '' %>>Conciliación Extrajudicial</option>
+            <option value="conciliación y familia" <%= blog.categoria.includes('conciliación y familia') ? 'selected' : '' %>>Conciliación y Familia</option>
+            <option value="conciliación y comercial" <%= blog.categoria.includes('conciliación y comercial') ? 'selected' : '' %>>Conciliación y Comercial</option>
+            <option value="conciliación y civil" <%= blog.categoria.includes('conciliación y civil') ? 'selected' : '' %>>Conciliación y Civil</option>
+            <option value="conciliación y contrataciones con el estado" <%= blog.categoria.includes('conciliación y contrataciones con el estado') ? 'selected' : '' %>>Conciliación y Contrataciones con el Estado</option>
+            <option value="contrataciones con el estado" <%= blog.categoria.includes('contrataciones con el estado') ? 'selected' : '' %>>Contrataciones con el Estado</option>
+            <option value="civil" <%= blog.categoria.includes('civil') ? 'selected' : '' %>>Civil</option>
+            <option value="comercial" <%= blog.categoria.includes('comercial') ? 'selected' : '' %>>Comercial</option>
+            <option value="familia" <%= blog.categoria.includes('familia') ? 'selected' : '' %>>Familia</option>
+            <!-- Agrega todas las opciones adicionales aquí -->
         </select>
         <br>
         <!-- Muestra la imagen actual si existe -->

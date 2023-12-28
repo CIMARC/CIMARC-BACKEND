@@ -31,12 +31,28 @@
                 <input type="date" class="form-control" id="fecha" name="fecha" value="<%= evento.fecha %>" >
 
                 <label for="categoria">Categoría:</label>
-                <select class="form-control" id="categoria" name="categoria" multiple required>
-                    <!-- Opciones de categorías -->
-                    <option value="categoria1" <%= evento.categoria.includes('categoria1') ? 'selected' : '' %>>Categoría 1</option>
-                    <option value="categoria2" <%= evento.categoria.includes('categoria2') ? 'selected' : '' %>>Categoría 2</option>
 
-                    <!-- Agrega más opciones según sea necesario -->
+                <select class="form-control" id="categoria" name="categoria" multiple required>
+                    <!-- Opciones adicionales -->
+                    <option value="corporativo" <%= evento.categoria.includes('corporativo') ? 'selected' : '' %>>Corporativo</option>
+                    <option value="comercial" <%= evento.categoria.includes('comercial') ? 'selected' : '' %>>Comercial</option>
+                    <option value="arbitraje" <%= evento.categoria.includes('arbitraje') ? 'selected' : '' %>>Arbitraje</option>
+                    <option value="arbitraje y contrataciones con el estado" <%= evento.categoria.includes('arbitraje y contrataciones con el estado') ? 'selected' : '' %>>Arbitraje y Contrataciones con el Estado</option>
+                    <option value="arbitraje y comercial" <%= evento.categoria.includes('arbitraje y comercial') ? 'selected' : '' %>>Arbitraje y Comercial</option>
+                    <option value="arbitraje y civil" <%= evento.categoria.includes('arbitraje y civil') ? 'selected' : '' %>>Arbitraje y Civil</option>
+                    <option value="arbitraje express" <%= evento.categoria.includes('arbitraje express') ? 'selected' : '' %>>Arbitraje Express</option>
+                    <option value="arbitraje de menor cuantia" <%= evento.categoria.includes('arbitraje de menor cuantia') ? 'selected' : '' %>>Arbitraje de Menor Cuantía</option>
+                    <option value="arbitraje alta cuantia" <%= evento.categoria.includes('arbitraje alta cuantia') ? 'selected' : '' %>>Arbitraje Alta Cuantía</option>
+                    <option value="arbitraje de emergencia" <%= evento.categoria.includes('arbitraje de emergencia') ? 'selected' : '' %>>Arbitraje de Emergencia</option>
+                    <option value="conciliación extrajudicial" <%= evento.categoria.includes('conciliación extrajudicial') ? 'selected' : '' %>>Conciliación Extrajudicial</option>
+                    <option value="conciliación y familia" <%= evento.categoria.includes('conciliación y familia') ? 'selected' : '' %>>Conciliación y Familia</option>
+                    <option value="conciliación y comercial" <%= evento.categoria.includes('conciliación y comercial') ? 'selected' : '' %>>Conciliación y Comercial</option>
+                    <option value="conciliación y civil" <%= evento.categoria.includes('conciliación y civil') ? 'selected' : '' %>>Conciliación y Civil</option>
+                    <option value="conciliación y contrataciones con el estado" <%= evento.categoria.includes('conciliación y contrataciones con el estado') ? 'selected' : '' %>>Conciliación y Contrataciones con el Estado</option>
+                    <option value="contrataciones con el estado" <%= evento.categoria.includes('contrataciones con el estado') ? 'selected' : '' %>>Contrataciones con el Estado</option>
+                    <option value="civil" <%= evento.categoria.includes('civil') ? 'selected' : '' %>>Civil</option>
+                    <option value="familia" <%= evento.categoria.includes('familia') ? 'selected' : '' %>>Familia</option>
+                    <!-- Todas las opciones han sido agregadas -->
                 </select>
 
                 <label for="descripcion">Descripción:</label>
