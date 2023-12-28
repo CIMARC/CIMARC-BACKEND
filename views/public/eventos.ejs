@@ -17,6 +17,19 @@
       <div class="container"> 
 
         <% eventos.forEach(evento => { %>
+          <% let categoriaString = evento.categoria; %>
+          <% if (typeof categoriaString === 'object') { %>
+            <% categoriaString = JSON.stringify(categoriaString); %>
+          <% } %>
+          <% categoriaString = categoriaString.replace(/'/g, '"'); %>
+          <% const categorias = JSON.parse(categoriaString); %>
+
+
+          <% const limitedDescription = evento.descripcion.slice(0, 150).replace(/<[^>]+>/g, ''); %>
+
+
+
+
         <div class="col-12 col-lg-8 flex-column row-gap-40">
               <a class="row blog-item row-gap-20 item-filter" href="/eventos/<%= evento.id %>" data-name="<%= evento.categoria %>">
                   <div class="col-12 col-md-6">
@@ -25,8 +38,15 @@
                       </div>
                   </div>
                   <div class="col-12 col-md-6">
-                      <div class="caption2 pt-4 pb-4 pl-12 pr-12 bg-surface bora-40 display-inline-block">
-                          <%- evento.categoria %>
+                    <div
+                    class="list-tag mt-16 d-flex flex-wrap gap-12"
+                    >
+                        <% categorias.forEach(c => { %>
+                          <a class="caption2 pt-8 pb-8 pl-16 pr-16 bg-surface bora-20 hover-button-black" href="#!">
+                            <%= c %>
+                          </a>
+                        <% }); %>
+                      
                       </div>
                       <div class="heading6 mt-8">
                           <%- evento.titulo %>
