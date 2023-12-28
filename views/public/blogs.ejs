@@ -25,6 +25,9 @@
               <% } %>
               <% categoriaString = categoriaString.replace(/'/g, '"'); %>
               <% const categorias = JSON.parse(categoriaString); %>
+
+              <% const limitedDescription = blog.descripcion.slice(0, 150).replace(/<[^>]+>/g, ''); %>
+
              
               <div class="col-12 col-lg-8 flex-column row-gap-40" >
                 <a
@@ -65,7 +68,7 @@
                       </div>
                     </div>
                     <div class="body3 text-secondary mt-16 pb-16">
-                      <%- blog.descripcion -%>
+                      <%= limitedDescription -%> ...
                     </div>
                     <div class="read fw-700 text-underline">Read More</div>
                   </div></a
