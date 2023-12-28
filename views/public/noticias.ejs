@@ -4,7 +4,7 @@
 <div id="content">
   <div class="slider-sub">
     <div class="bg-img">
-      <div class="bg-img"> <img src="assets/images/new.jpg" alt="banner"/></div>
+      <div class="bg-img"> <img src="assets/images/1222.jpg" alt="banner"/></div>
     </div>
     <div class="container">
 
@@ -21,6 +21,15 @@
       <div class="container"> 
 
         <% noticias.forEach(noticia => { %>
+          <% let categoriaString = noticia.categoria; %>
+          <% if (typeof categoriaString === 'object') { %>
+            <% categoriaString = JSON.stringify(categoriaString); %>
+          <% } %>
+          <% categoriaString = categoriaString.replace(/'/g, '"'); %>
+          <% const categorias = JSON.parse(categoriaString); %>
+          <% const limitedDescription = noticia.descripcion.slice(0, 150).replace(/<[^>]+>/g, ''); %>
+
+
         <div class="col-12 col-lg-8 flex-column row-gap-40">
               <a class="row blog-item row-gap-20 item-filter" href="/noticias/<%= noticia.id %>" data-name="<%= noticia.categoria %>">
                   <div class="col-12 col-md-6">
@@ -30,7 +39,10 @@
                   </div>
                   <div class="col-12 col-md-6">
                       <div class="caption2 pt-4 pb-4 pl-12 pr-12 bg-surface bora-40 display-inline-block">
-                          <%- noticia.categoria %>
+                        <%- noticia.categoria %>
+                        <%- noticia.categoria %>
+                        <%- noticia.categoria %>
+
                       </div>
                       <div class="heading6 mt-8">
                           <%- noticia.titulo %>
@@ -50,7 +62,7 @@
                       </div>
                       <!-- Puedes agregar más detalles sobre el evento aquí si es necesario -->
                       <div class="body3 text-secondary mt-16 pb-16">
-                          <%- noticia.descripcion %>
+                          <%= limitedDescription %>....
                       </div>
                       <div class="read fw-700 text-underline">Leer más</div>
                   </div>
