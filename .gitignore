@@ -9,3 +9,6 @@ config/db.js
 .env
 .env
 .env
+views/public/blog-detail-one.html
+views/public/blogs.ejs
+views/public/noticias.ejs
