@@ -18,65 +18,54 @@
   </div>
 
   <div class="blog-list mt-100">
-      <div class="container"> 
-
-        <% noticias.forEach(noticia => { %>
-          <% let categoriaString = noticia.categoria; %>
-          <% if (typeof categoriaString === 'object') { %>
-            <% categoriaString = JSON.stringify(categoriaString); %>
-          <% } %>
-          <% categoriaString = categoriaString.replace(/'/g, '"'); %>
-          <% const categorias = JSON.parse(categoriaString); %>
-
-
-          <% const limitedDescription = noticia.descripcion.slice(0, 150).replace(/<[^>]+>/g, ''); %>
-
-
-            <div class="col-12 col-lg-8 flex-column row-gap-40">
-              <a class="row blog-item row-gap-20 item-filter" href="/noticias/<%= noticia.id %>" data-name="<%= noticia.categoria %>">
-                  <div class="col-12 col-md-6">
-                      <div class="bg-img w-100 overflow-hidden bora-16">
-                          <img class="w-100 h-100 display-block" src="../../uploads/noticias/<%= noticia.imagen %>" alt="<%= noticia.titulo %>" />
-                      </div>
-                  </div>
-                  <div class="col-12 col-md-6">
-                    <div class="list-tag mt-16 d-flex flex-wrap gap-12"
-                    >
-                    <% categorias.forEach(c => { %>
-                      <a class="caption2 pt-8 pb-8 pl-16 pr-16 bg-surface bora-20 hover-button-black" href="#!">
-                        <%= c %>
-                      </a>
-                    <% }); %>
-
-                  </div>
-
-                      
-                      <div class="heading6 mt-8">
-                          <%- noticia.titulo %>
-                      </div>
-                      <div class="date flex-item-center gap-16 mt-8">
-                          <div class="author caption2 text-secondary">
-                              by 
-                              <% if (noticia.user && noticia.user.email) { %>
-                                  <span class="text-on-surface"><%- noticia.user.email %></span>
-                              <% } else { %>
-                                  <span class="text-on-surface">Usuario sin correo</span>
-                              <% } %>
-                          </div>
-                          <div class="item-date flex-item-center">
-                              <i class="ph-bold ph-calendar-blank"></i><span class="ml-4 caption2"> <%- noticia.fecha %></span>
-                          </div>
-                      </div>
-                      <!-- Puedes agregar más detalles sobre el evento aquí si es necesario -->
-                      <div class="body3 text-secondary mt-16 pb-16">
-                          <%= limitedDescription %>....
-                      </div>
-                      <div class="read fw-700 text-underline">Leer más</div>
-                    </div>
-           
+    <div class="container">
+      <% noticias.forEach(noticia => { %>
+        <% let categoriaString = noticia.categoria; %>
+        <% if (typeof categoriaString === 'object') { %>
+          <% categoriaString = JSON.stringify(categoriaString); %>
+        <% } %>
+        <% categoriaString = categoriaString.replace(/'/g, '"'); %>
+        <% const categorias = JSON.parse(categoriaString); %>
+  
+        <% const limitedDescription = noticia.descripcion.slice(0, 150).replace(/<[^>]+>/g, ''); %>
+  
+        <div class="row blog-item row-gap-20 item-filter">
+          <div class="col-12 col-md-6">
+            <div class="bg-img w-100 overflow-hidden bora-16" style="width: 100%;">
+              <img class="w-100 h-100 display-block" src="../../uploads/noticias/<%= noticia.imagen %>" alt="<%= noticia.titulo %>" />
             </div>
-
-          <% }); %>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="list-tag mt-16 d-flex flex-wrap gap-12">
+              <% categorias.forEach(c => { %>
+                <a class="caption2 pt-8 pb-8 pl-16 pr-16 bg-surface bora-20 hover-button-black"  href="noticia-detail-one.html">
+                  <%= c %>
+                </a>
+              <% }); %>
+            </div>
+            <div class="heading6 mt-8">
+              <%- noticia.titulo %>
+            </div>
+            <div class="date flex-item-center gap-16 mt-8">
+              <div class="author caption2 text-secondary">
+                by
+                <% if (noticia.user && noticia.user.email) { %>
+                  <span class="text-on-surface"><%- noticia.user.email %></span>
+                <% } else { %>
+                  <span class="text-on-surface">Usuario sin correo</span>
+                <% } %>
+              </div>
+              <div class="item-date flex-item-center">
+                <i class="ph-bold ph-calendar-blank"></i><span class="ml-4 caption2"> <%- noticia.fecha %></span>
+              </div>
+            </div>
+            <div class="body3 text-secondary mt-16 pb-16">
+              <%= limitedDescription %>....
+            </div>
+            <a href="/noticias/<%= noticia.id %>" class="read fw-700 text-underline">Leer más</a>
+          </div>
+        </div>
+      <% }); %>
       
           <!-- Navegación Paginada -->
           <div class="list-nav flex-item-center gap-8">
@@ -192,7 +181,7 @@
   
     </div>
   </div>
-  <a class="scroll-to-top-btn" href="#header"
-    ><i class="ph-bold ph-caret-up"></i
-  ></a>
+  <a class="scroll-to-top-btn" href="#header">
+    <i class="ph-bold ph-caret-up"></i>
+  </a>
   <div class="pb-100"></div>
