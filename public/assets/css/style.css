@@ -7531,6 +7531,42 @@ Reduce font and spacing: Start
   }
 }
 
+.cuadro {
+  background-color: #eeee; /* Color de fondo azul */
+  color: #000000; /* Color del texto blanco */
+  padding: 10px; /* Espaciado interno */
+
+  display: flex;
+  align-items: center; /* Centrado vertical */
+  justify-content: center; /* Centrado horizontal */
+  height: 180px; /* Ajusta la altura según sea necesario */
+  margin-top: 40px; /* Espaciado superior */
+}
+.cuadro-segundario {
+  background-color: #eeeeee; /* Color de fondo */
+  color: #000000; /* Color del texto */
+  padding: 9px; /* Espaciado interno reducido */
+  align-items: center; /* Centrado vertical */
+  justify-content: center; /* Centrado horizontal */
+  margin-top: 9px; /* Espaciado superior reducido */
+  width: 320px; /* Ancho del cuadro */
+  height: 180px; /* Altura del cuadro */
+  overflow: hidden; /* Oculta el contenido que excede las dimensiones del cuadro */
+}
+.cuadro-tercero {
+  background-color: #eeeeee; /* Color de fondo */
+  color: #000000; /* Color del texto */
+  padding: 5px; /* Espaciado interno reducido */
+  align-items: center; /* Centrado vertical */
+  justify-content: center; /* Centrado horizontal */
+  margin-top: 9px; /* Espaciado superior reducido */
+  width: 325px; /* Ancho del cuadro */
+  height: 187px; /* Altura del cuadro */
+  overflow: hidden; /* Oculta el contenido que excede las dimensiones del cuadro */
+}
+
+
+
 /*
 Reduce font and spacing: End
 */
