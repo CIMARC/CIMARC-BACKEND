@@ -30,10 +30,6 @@
 
             
               <div class="col-12 col-lg-8 flex-column row-gap-40" >
-                <a
-                  class="row blog-item row-gap-20 item-filter"
-                  data-name="tab-one"
-                  href="/blogs/<%= blog.id %>">
                   <div class="col-12 col-md-11">
                     <div class="bg-img w-100 overflow-hidden bora-16 ">
                       <img
@@ -41,13 +37,7 @@
                         src="../../uploads/blogs/<%= blog.imagen %>"
                         alt=""
                       />  
-                      <div class="col-12 col-md-6 offset-md-1" >
-                        <a
-                  class="row blog-item row-gap-20 item-filter"
-                  href="blog-detail-one.html"
-                  data-name="tab-one"
-                > </a
-                ><div 
+                      <div class="col-12 col-md-6 offset-md-1" ><div 
                         class="list-tag mt-16 d-flex flex-wrap gap-12"
                         >
                         <% categorias.forEach(c => { %>
@@ -73,7 +63,7 @@
                         <div class="body3 text-secondary mt-16 pb-16">
                           <%= limitedDescription -%> ...
                         </div>
-                        <div class="read fw-700 text-underline" >Read More</div>
+                        <a href="/blogs/<%= blog.id %>" class="read fw-700 text-underline">Leer más</a>
                       </div>
                     </div>
                   </div>
