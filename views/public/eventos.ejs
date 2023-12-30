@@ -32,44 +32,46 @@
 
         <div class="col-12 col-lg-8 flex-column row-gap-40">
               <a class="row blog-item row-gap-20 item-filter" href="/eventos/<%= evento.id %>" data-name="<%= evento.categoria %>">
-                  <div class="col-12 col-md-6">
+                  <div class="col-12 col-md-11">
                       <div class="bg-img w-100 overflow-hidden bora-16">
                           <img class="w-100 h-100 display-block" src="../../uploads/eventos/imagen/<%= evento.imagen %>" alt="<%= evento.titulo %>" />
-                      </div>
+                          <div class="col-12 col-md-6 offset-md-1">
+                            <div
+                            class="list-tag mt-16 d-flex flex-wrap gap-12"
+                            >
+                                <% categorias.forEach(c => { %>
+                                  <a class="caption2 pt-8 pb-8 pl-16 pr-16 bg-surface bora-20 hover-button-black" href="#!">
+                                    <%= c %>
+                                  </a>
+                                <% }); %>
+                              
+                              </div>
+                              <div class="heading6 mt-8">
+                                  <%- evento.titulo %>
+                              </div>
+                              <div class="date flex-item-center gap-16 mt-8">
+                                  <div class="author caption2 text-secondary">
+                                      by 
+                                      <% if (evento.user && evento.user.email) { %>
+                                          <span class="text-on-surface"><%- evento.user.email %></span>
+                                      <% } else { %>
+                                          <span class="text-on-surface">Usuario sin correo</span>
+                                      <% } %>
+                                  </div>
+                                  <div class="item-date flex-item-center">
+                                      <i class="ph-bold ph-calendar-blank"></i><span class="ml-4 caption2"> <%- evento.fecha %></span>
+                                  </div>
+                              </div>
+                              <!-- Puedes agregar más detalles sobre el evento aquí si es necesario -->
+                              <div class="body3 text-secondary mt-16 pb-16">
+                                  <%= limitedDescription %>...
+                              </div>
+                              <a href="/eventos/<%= evento.id %>" class="read fw-700 text-underline">Leer más</a>
+
+                            </div>
+                        </div>
                   </div>
-                  <div class="col-12 col-md-6">
-                    <div
-                    class="list-tag mt-16 d-flex flex-wrap gap-12"
-                    >
-                        <% categorias.forEach(c => { %>
-                          <a class="caption2 pt-8 pb-8 pl-16 pr-16 bg-surface bora-20 hover-button-black" href="#!">
-                            <%= c %>
-                          </a>
-                        <% }); %>
-                      
-                      </div>
-                      <div class="heading6 mt-8">
-                          <%- evento.titulo %>
-                      </div>
-                      <div class="date flex-item-center gap-16 mt-8">
-                          <div class="author caption2 text-secondary">
-                              by 
-                              <% if (evento.user && evento.user.email) { %>
-                                  <span class="text-on-surface"><%- evento.user.email %></span>
-                              <% } else { %>
-                                  <span class="text-on-surface">Usuario sin correo</span>
-                              <% } %>
-                          </div>
-                          <div class="item-date flex-item-center">
-                              <i class="ph-bold ph-calendar-blank"></i><span class="ml-4 caption2"> <%- evento.fecha %></span>
-                          </div>
-                      </div>
-                      <!-- Puedes agregar más detalles sobre el evento aquí si es necesario -->
-                      <div class="body3 text-secondary mt-16 pb-16">
-                          <%= limitedDescription %>...
-                      </div>
-                      <div class="read fw-700 text-underline">Leer más</div>
-                  </div>
+                 
               </a>
             </div>
 
